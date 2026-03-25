@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cc40g7jtk0kea"]
+
+[ext_resource type="Script" uid="uid://dricrpqkma7ti" path="res://scripts/ui/pause_menu.gd" id="1_6tw0m"]
+[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="2_0lmf7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu0qw"]
+bg_color = Color(0.24705882, 0.2509804, 0.2509804, 0.7490196)
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1781776980]
+process_mode = 3
+visible = false
+script = ExtResource("1_6tw0m")
+
+[node name="PauseMenuPanel" type="Panel" parent="." unique_id=117559961]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pu0qw")
+
+[node name="OptionContainer" type="VBoxContainer" parent="PauseMenuPanel" unique_id=647345754]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="btn_resume" type="Button" parent="PauseMenuPanel/OptionContainer" unique_id=1030039752]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0lmf7")
+text = "继续"
+
+[node name="btn_save" type="Button" parent="PauseMenuPanel/OptionContainer" unique_id=1993593935]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0lmf7")
+text = "保存"
+
+[node name="btn_main_menu" type="Button" parent="PauseMenuPanel/OptionContainer" unique_id=338766260]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0lmf7")
+text = "返回主菜单"
