@@ -96,11 +96,13 @@ grow_vertical = 2
 [node name="btn_new_game" type="Button" parent="ExplorePanel/OptionNewGameContainer" unique_id=861470848]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_1g8jr")
+button_mask = 0
 text = "开始新游戏"
 
 [node name="btn_load_game" type="Button" parent="ExplorePanel/OptionNewGameContainer" unique_id=1522591079]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_1g8jr")
+button_mask = 0
 text = "加载存档"
 
 [node name="MultiPanel" type="Panel" parent="." unique_id=937410302]
