@@ -15,6 +15,10 @@ run/main_scene="uid://wfrj4ijhqwyw"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SaveManager="*uid://cwwaieafpaq3m"
+
 [gui]
 
 theme/custom_font="uid://b6ld40bxw4sr"

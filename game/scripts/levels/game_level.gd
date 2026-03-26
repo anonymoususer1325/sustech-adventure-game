@@ -26,8 +26,9 @@ func _on_resume_pressed():
 	toggle_pause_menu()
 
 func _on_save_pressed():
-	# TODO: 后续实现存档功能
-	print("保存游戏（暂未实现）")
+	SaveManager.save_game()
+	# 可以显示短暂提示，如 "游戏已保存"
+	print("游戏已保存")
 
 func _on_main_menu_pressed():
 	# 返回主菜单前，必须恢复游戏
