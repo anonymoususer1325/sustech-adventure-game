@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjstcofnlk8o2" path="res://scripts/ui/main_menu.gd" id="1_sl1te"]
 [ext_resource type="FontFile" uid="uid://dx0jy8f3giaa1" path="res://assets/fonts/SourceHanSansSC-Bold.otf" id="2_fe2o3"]
+[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="3_1g8jr"]
 
 [node name="MainMenu" type="Control" unique_id=800170858]
 layout_mode = 3
@@ -81,6 +82,26 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_fe2o3")
 theme_override_font_sizes/font_size = 24
 text = "独自探索模式"
+
+[node name="OptionNewGameContainer" type="VBoxContainer" parent="ExplorePanel" unique_id=289787946]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.15
+anchor_right = 0.25
+anchor_bottom = 0.35
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="btn_new_game" type="Button" parent="ExplorePanel/OptionNewGameContainer" unique_id=861470848]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_1g8jr")
+text = "开始新游戏"
+
+[node name="btn_load_game" type="Button" parent="ExplorePanel/OptionNewGameContainer" unique_id=1522591079]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_1g8jr")
+text = "加载存档"
 
 [node name="MultiPanel" type="Panel" parent="." unique_id=937410302]
 visible = false

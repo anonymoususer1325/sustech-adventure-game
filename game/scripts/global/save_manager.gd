@@ -76,3 +76,60 @@ func get_inventory_items() -> Array:
 	if has_node("/root/InventoryManager"):
 		return get_node("/root/InventoryManager").get_items()
 	return []
+
+# save_manager.gd（续）
+
+# 待恢复的存档数据（全局变量，供新场景读取）
+var pending_save_data: Dictionary = {}
+
+# 读取存档文件
+func load_game() -> bool:
+	if not FileAccess.file_exists(SAVE_PATH):
+		print("存档文件不存在")
+		return false
+	
+	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file == null:
+		print("无法打开存档文件")
+		return false
+	
+	var file_content = file.get_as_text()
+	file.close()
+	
+	# 如果存档是加密的，先解密
+	# var decrypted = simple_decrypt(file_content)   # 若有加密
+	
+	# 解析 JSON
+	var json = JSON.new()
+	var error = json.parse(file_content)
+	if error != OK:
+		print("JSON 解析失败")
+		return false
+	
+	var data = json.get_data()
+	
+	# 验证版本（可选）
+	if data.get("version", 0) != SAVE_VERSION:
+		print("存档版本不兼容")
+		return false
+	
+	# 校验和（如果有）
+	# 如果有 checksum，验证数据完整性
+	
+	# 将数据存入待恢复缓存
+	pending_save_data = data
+	
+	# 切换到存档中的场景
+	var scene_path = data.get("scene_path", "")
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		print("无效的场景路径")
+		return false
+	
+	get_tree().change_scene_to_file(scene_path)
+	return true
+
+# 获取并清除待恢复数据（供新场景调用）
+func consume_pending_save_data() -> Dictionary:
+	var data = pending_save_data
+	pending_save_data = {}
+	return data

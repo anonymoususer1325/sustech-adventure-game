@@ -34,14 +34,17 @@ grow_vertical = 2
 [node name="btn_resume" type="Button" parent="PauseMenuPanel/OptionContainer" unique_id=1030039752]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_0lmf7")
+button_mask = 0
 text = "继续"
 
 [node name="btn_save" type="Button" parent="PauseMenuPanel/OptionContainer" unique_id=1993593935]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_0lmf7")
+button_mask = 0
 text = "保存"
 
 [node name="btn_main_menu" type="Button" parent="PauseMenuPanel/OptionContainer" unique_id=338766260]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_0lmf7")
+button_mask = 0
 text = "返回主菜单"
