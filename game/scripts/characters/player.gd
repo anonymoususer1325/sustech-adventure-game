@@ -18,7 +18,14 @@ func _ready():
 	# 确保初始动画正确
 	update_animation(Vector2.ZERO)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+		# 移动锁定检查
+	if GameState.movement_locked:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
+	# 正常移动逻辑
 	# 获取输入方向（八方向）
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = input_dir
@@ -67,3 +74,9 @@ func get_direction_string(dir: Vector2) -> String:
 		return "right" if dir.x > 0 else "left"
 	else:
 		return "down" if dir.y > 0 else "up"
+
+# 在 player.gd 中添加一个测试输入
+#func _input(event):
+	#if event.is_action_pressed("ui_test"):  # 需在输入映射中添加一个测试动作
+		#print("触发测试事件：设置尺寸为 (2, 2)")
+		#$Circle.scale = Vector2(2, 2)

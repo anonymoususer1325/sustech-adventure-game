@@ -2,23 +2,31 @@
 
 [ext_resource type="Script" uid="uid://cg782pktyimf" path="res://scripts/characters/player.gd" id="1_yewv4"]
 [ext_resource type="SpriteFrames" uid="uid://dkjkn4jp2fluy" path="res://assets/characters/player_fox/player_fox.tres" id="2_yewv4"]
+[ext_resource type="Texture2D" uid="uid://ct05l6mhkerck" path="res://assets/textures/circle.svg" id="4_atpat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yewv4"]
-size = Vector2(16, 16)
+size = Vector2(8, 8)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_76oj4"]
+light_mode = 2
 
 [node name="Player" type="CharacterBody2D" unique_id=642336814]
 script = ExtResource("1_yewv4")
-walk_speed = null
-run_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568014741]
 shape = SubResource("RectangleShape2D_yewv4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=455916024]
+material = SubResource("CanvasItemMaterial_76oj4")
 scale = Vector2(1.5, 1.5)
 sprite_frames = ExtResource("2_yewv4")
 animation = &"idle_down"
-offset = Vector2(0, -10)
+offset = Vector2(0, -9.5)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=83874471]
 limit_enabled = false
+
+[node name="Circle" type="PointLight2D" parent="." unique_id=991350036]
+scale = Vector2(2, 2)
+energy = 0.0
+texture = ExtResource("4_atpat")

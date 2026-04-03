@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3r3ryb1tbwon"
-path="res://.godot/imported/Groung.png-8d606313eefc580df9dc4421c828ecdc.ctex"
+uid="uid://ble15bmso477l"
+path="res://.godot/imported/Deco.png-7d332bd6298a03172470adcd18f0a39a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/Groung.png"
-dest_files=["res://.godot/imported/Groung.png-8d606313eefc580df9dc4421c828ecdc.ctex"]
+source_file="res://assets/images/Deco.png"
+dest_files=["res://.godot/imported/Deco.png-7d332bd6298a03172470adcd18f0a39a.ctex"]
 
 [params]
 

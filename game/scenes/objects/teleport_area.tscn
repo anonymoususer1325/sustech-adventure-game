@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d0mmjkij0ap1m"]
+
+[ext_resource type="Script" uid="uid://c8l3aw57kf6yu" path="res://scripts/components/teleport_area.gd" id="1_4fn8r"]
+[ext_resource type="Shape2D" uid="uid://dcujxmvpwh6sj" path="res://assets/shapes/teleport_area_segment_shape_2d.tres" id="2_ivd15"]
+
+[node name="TeleportArea" type="Area2D" unique_id=1122726686]
+monitoring = false
+script = ExtResource("1_4fn8r")
+
+[node name="TeleportAreaCollisionShape" type="CollisionShape2D" parent="." unique_id=797724407]
+shape = ExtResource("2_ivd15")

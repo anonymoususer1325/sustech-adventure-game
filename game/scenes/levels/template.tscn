@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://ddslilti6sala"]
+
+[ext_resource type="Script" uid="uid://cktm2ogcym55w" path="res://scripts/levels/game_level.gd" id="1_vqls4"]
+[ext_resource type="TileSet" uid="uid://5epe3v7m1r6f" path="res://assets/tilesets/ground.tres" id="2_3oajb"]
+[ext_resource type="TileSet" uid="uid://ci1puiu2plp4p" path="res://assets/tilesets/path.tres" id="3_b0b7q"]
+[ext_resource type="TileSet" uid="uid://6onpqaxs8i68" path="res://assets/tilesets/pattern.tres" id="4_5l7j5"]
+[ext_resource type="TileSet" uid="uid://d1cogqhnbavdd" path="res://assets/tilesets/deco.tres" id="5_esycm"]
+[ext_resource type="PackedScene" uid="uid://clfn53xkwsbqt" path="res://scenes/characters/player.tscn" id="5_hbykn"]
+[ext_resource type="TileSet" uid="uid://crv4da6eb6y8y" path="res://assets/tilesets/props.tres" id="6_c1g4c"]
+[ext_resource type="PackedScene" uid="uid://cc40g7jtk0kea" path="res://scenes/ui/pause_menu.tscn" id="6_n1p8n"]
+[ext_resource type="TileSet" uid="uid://dcf7c2b1vpnrq" path="res://assets/tilesets/tall_props.tres" id="7_5hg7i"]
+[ext_resource type="TileSet" uid="uid://due5jitdy0v5c" path="res://assets/tilesets/buildings.tres" id="8_38kbd"]
+[ext_resource type="TileSet" uid="uid://dhc7ejkfx8s5k" path="res://assets/tilesets/buildings_deco.tres" id="9_tdmmw"]
+[ext_resource type="TileSet" uid="uid://bvhkg5i16b36x" path="res://assets/tilesets/overlay.tres" id="10_q4hcs"]
+[ext_resource type="TileSet" uid="uid://bck55ay7ocleg" path="res://assets/tilesets/collision.tres" id="11_o2alw"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q2cre"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kfykg"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sce6r"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tg8cx"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v7tsa"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oarag"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_64lpu"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kqfcg"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j4hja"]
+light_mode = 2
+
+[node name="Level" type="Node2D" unique_id=716520191]
+script = ExtResource("1_vqls4")
+north_vector = Vector2(0.985, -0.174)
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1870137271]
+material = SubResource("CanvasItemMaterial_q2cre")
+tile_set = ExtResource("2_3oajb")
+
+[node name="Path" type="TileMapLayer" parent="." unique_id=273488938]
+material = SubResource("CanvasItemMaterial_kfykg")
+tile_set = ExtResource("3_b0b7q")
+
+[node name="Pattern" type="TileMapLayer" parent="." unique_id=504116146]
+modulate = Color(1, 1, 1, 0.24705882)
+material = SubResource("CanvasItemMaterial_sce6r")
+tile_set = ExtResource("4_5l7j5")
+
+[node name="Deco" type="TileMapLayer" parent="." unique_id=2004634403]
+material = SubResource("CanvasItemMaterial_tg8cx")
+tile_set = ExtResource("5_esycm")
+
+[node name="Props" type="TileMapLayer" parent="." unique_id=435779171]
+material = SubResource("CanvasItemMaterial_v7tsa")
+tile_set = ExtResource("6_c1g4c")
+
+[node name="TallProps" type="TileMapLayer" parent="." unique_id=1685752798]
+material = SubResource("CanvasItemMaterial_oarag")
+tile_set = ExtResource("7_5hg7i")
+
+[node name="Buildings" type="TileMapLayer" parent="." unique_id=1400480616]
+material = SubResource("CanvasItemMaterial_64lpu")
+tile_set = ExtResource("8_38kbd")
+
+[node name="BuildingsDeco" type="TileMapLayer" parent="." unique_id=1648779027]
+material = SubResource("CanvasItemMaterial_kqfcg")
+tile_set = ExtResource("9_tdmmw")
+
+[node name="Overlay" type="TileMapLayer" parent="." unique_id=899103238]
+material = SubResource("CanvasItemMaterial_j4hja")
+tile_set = ExtResource("10_q4hcs")
+
+[node name="Collision" type="TileMapLayer" parent="." unique_id=1800901350]
+visible = false
+tile_set = ExtResource("11_o2alw")
+
+[node name="Player" parent="." unique_id=642336814 instance=ExtResource("5_hbykn")]
+position = Vector2(2, 2)
+
+[node name="PauseMenu" parent="." unique_id=1608922808 instance=ExtResource("6_n1p8n")]

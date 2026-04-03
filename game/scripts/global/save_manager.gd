@@ -4,6 +4,8 @@ extends Node
 const SAVE_VERSION = 1
 const SAVE_PATH = "user://save.dat"   # 存档文件路径
 
+var pending_load_data = null   # 允许为 null 或 Vector2
+
 # 保存游戏
 func save_game() -> bool:
 	var data = collect_save_data()
@@ -41,10 +43,23 @@ func collect_save_data() -> Dictionary:
 	# 获取背包物品
 	data["inventory"] = get_inventory_items()
 	
+	# 添加玩家朝向
+	var facing = get_player_facing()
+	data["facing_x"] = facing.x
+	data["facing_y"] = facing.y
+	
 	return data
 
 # 以下是需要从游戏中获取数据的函数，具体实现取决于你的项目结构
 # 暂时可以用示例数据，后续与真实模块对接
+
+func get_player_facing() -> Vector2:
+	var current_scene = get_tree().current_scene
+	if current_scene:
+		var player = current_scene.get_node_or_null("Player")
+		if player:  # 或直接访问属性
+			return player.facing_direction
+	return Vector2(0, -1)  # 默认向下
 
 func get_current_scene_path() -> String:
 	var current_scene = get_tree().current_scene
@@ -119,6 +134,15 @@ func load_game() -> bool:
 	# 将数据存入待恢复缓存
 	pending_save_data = data
 	
+	# 解析成功后，从 data 字典中获取坐标
+	var target_pos = Vector2(data.get("player_x", 0), data.get("player_y", 0))
+	var target_facing = Vector2(data.get("facing_x", 0), data.get("facing_y", 1))  # 默认向下
+	pending_load_data = {
+		"position": target_pos,
+		"facing": target_facing
+	}
+	print("load_game: 设置 pending_load_position = ", target_pos, ", facing = ", target_facing)   # 此时 target_pos 已定义
+	
 	# 切换到存档中的场景
 	var scene_path = data.get("scene_path", "")
 	if scene_path == "" or not ResourceLoader.exists(scene_path):
@@ -127,6 +151,12 @@ func load_game() -> bool:
 	
 	get_tree().change_scene_to_file(scene_path)
 	return true
+
+# 获取并清除待加载位置（由新场景调用）
+func consume_pending_load_data():
+	var data = pending_load_data
+	pending_load_data = null
+	return data   # 返回字典或 null
 
 # 获取并清除待恢复数据（供新场景调用）
 func consume_pending_save_data() -> Dictionary:
