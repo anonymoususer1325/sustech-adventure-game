@@ -1,17 +1,23 @@
 [gd_scene format=3 uid="uid://idgvfb307cmy"]
 
-[ext_resource type="Script" uid="uid://olbg2dyo8hnx" path="res://scripts/components/interactable.gd" id="1_i4yyw"]
-[ext_resource type="Texture2D" uid="uid://ct05l6mhkerck" path="res://assets/shapes/circle_d1322.svg" id="1_qn87c"]
+[ext_resource type="Script" uid="uid://cp4rafxkgoftw" path="res://scripts/components/npc.gd" id="1_qn87c"]
+[ext_resource type="SpriteFrames" uid="uid://d26mj0xa60l1" path="res://assets/characters/npc_grouse/npc_grouse.tres" id="2_i4yyw"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i4yyw"]
+light_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qgsx0"]
 radius = 66.0
 
 [node name="Npc" type="Node2D" unique_id=879473222]
-script = ExtResource("1_i4yyw")
+script = ExtResource("1_qn87c")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1721656269]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_qn87c")
+[node name="NpcAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1467039364]
+material = SubResource("CanvasItemMaterial_i4yyw")
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("2_i4yyw")
+animation = &"idle_down"
+offset = Vector2(0, -9.5)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1249015776]
 

@@ -108,6 +108,5 @@ target_spawn_point = "LH3MidMarker"
 [node name="LeftMarker" type="Marker2D" parent="." unique_id=1409719964]
 position = Vector2(16, -80)
 
-[node name="Npc_001" parent="." unique_id=879473222 instance=ExtResource("15_hraxc")]
-position = Vector2(512, -136)
-interaction_range = 108.0
+[node name="Npc001" parent="." unique_id=879473222 instance=ExtResource("15_hraxc")]
+position = Vector2(512, -160)

@@ -68,9 +68,11 @@ func update_focus():
 			if dist_sq < closest_dist_sq:
 				closest_dist_sq = dist_sq
 				closest = interactable
+	print("update_focus: 当前焦点=", current_focus.name if current_focus else "null", " 最近对象=", closest.name if closest else "null")
 	
 	# 设置焦点
 	if closest != current_focus:
+		print("焦点切换：从 ", current_focus.name if current_focus else "null", " 到 ", closest.name if closest else "null")
 		if current_focus:
 			current_focus.is_focused = false
 		current_focus = closest
@@ -79,6 +81,7 @@ func update_focus():
 
 # 清除焦点
 func clear_focus():
+	print("clear_focus 被调用，当前焦点=", current_focus.name if current_focus else "null")
 	if current_focus:
 		current_focus.is_focused = false
 		current_focus = null
