@@ -80,3 +80,7 @@ func get_direction_string(dir: Vector2) -> String:
 	#if event.is_action_pressed("ui_test"):  # 需在输入映射中添加一个测试动作
 		#print("触发测试事件：设置尺寸为 (2, 2)")
 		#$Circle.scale = Vector2(2, 2)
+
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		InteractionManager.interact_with_focus()

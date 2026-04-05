@@ -14,6 +14,7 @@
 [ext_resource type="TileSet" uid="uid://bvhkg5i16b36x" path="res://assets/tilesets/overlay.tres" id="10_trukd"]
 [ext_resource type="TileSet" uid="uid://bck55ay7ocleg" path="res://assets/tilesets/collision.tres" id="11_u1vhr"]
 [ext_resource type="PackedScene" uid="uid://d0mmjkij0ap1m" path="res://scenes/objects/teleport_area.tscn" id="14_nva0k"]
+[ext_resource type="PackedScene" uid="uid://idgvfb307cmy" path="res://scenes/objects/npc.tscn" id="15_hraxc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nva0k"]
 light_mode = 2
@@ -106,3 +107,7 @@ target_spawn_point = "LH3MidMarker"
 
 [node name="LeftMarker" type="Marker2D" parent="." unique_id=1409719964]
 position = Vector2(16, -80)
+
+[node name="Npc_001" parent="." unique_id=879473222 instance=ExtResource("15_hraxc")]
+position = Vector2(512, -136)
+interaction_range = 108.0

@@ -57,11 +57,12 @@ func _ready():
 		# 锁定玩家 0.5 秒
 		GameState.lock_movement_for(0.5)
 	
-	# 3. 延迟启用所有传送区域（给玩家足够时间稳定）
-	await get_tree().create_timer(0.5).timeout
-	for area in teleport_areas:
-		area.monitoring = true
-		#print("恢复传送区域: ", area.name)
+	# 设置 InteractionManager 的玩家引用
+	if player:
+		InteractionManager.player = player
+		print("InteractionManager 玩家已设置: ", player.name)
+	else:
+		print("警告：未找到玩家节点，无法设置 InteractionManager.player")
 	
 	# 确保暂停菜单初始不可见
 	pause_menu.visible = false
@@ -73,6 +74,12 @@ func _ready():
 	var save_data = SaveManager.consume_pending_save_data()
 	if not save_data.is_empty():
 		restore_from_save(save_data)
+	
+	# 3. 延迟启用所有传送区域（给玩家足够时间稳定）
+	await get_tree().create_timer(0.5).timeout
+	for area in teleport_areas:
+		area.monitoring = true
+		#print("恢复传送区域: ", area.name)
 
 func rotate_vector(vec: Vector2, from_north: Vector2, to_north: Vector2) -> Vector2:
 	var from_angle = from_north.angle()
