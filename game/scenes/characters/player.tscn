@@ -16,7 +16,7 @@ script = ExtResource("1_yewv4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568014741]
 shape = SubResource("CircleShape2D_76oj4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=455916024]
+[node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=455916024]
 material = SubResource("CanvasItemMaterial_76oj4")
 scale = Vector2(1.5, 1.5)
 sprite_frames = ExtResource("2_yewv4")

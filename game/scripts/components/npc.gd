@@ -4,6 +4,12 @@ extends Interactable
 
 @onready var animation = $NpcAnimatedSprite
 
+# 对话 ID（在 JSON 中对应的根节点 ID）
+@export var dialog_id: String = "npc_greeting"
+
+# 显示名称（留空则使用节点名）
+@export var display_name: String = ""
+
 func _ready():
 	super._ready()
 	update_animation(default_direction)
@@ -21,7 +27,7 @@ func _on_focus_changed(focused: bool):
 		print("Execute on focus changed: defocused")
 		update_animation(default_direction)
 
-func _process(delta):
+func _process(_delta):
 	# 使用父类的 is_focused 属性（通过 getter）
 	if is_focused:
 		var player = InteractionManager.player
@@ -44,3 +50,11 @@ func update_animation(direction: String):
 		animation.play(anim_name)
 	else:
 		animation.play("idle_" + direction)
+
+# npc.gd（扩展部分）
+func interact():
+	# 调用父类的 interact（可选，保留打印）
+	super.interact()
+	print("NPC dialog triggered")
+	# 开始对话，传入该 NPC 对应的对话 ID（可以在 NPC 节点中导出变量）
+	GameDialogManager.start_dialog(dialog_id, self)   # dialog_id 需要在 NPC 中定义
