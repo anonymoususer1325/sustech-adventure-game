@@ -1,0 +1,38 @@
+{
+  "dialogs": {
+    "npc_greeting": {
+      "id": "npc_greeting",
+      "text": "你好啊，新同学！需要帮忙吗？",
+      "options": [
+        {
+          "text": "请问图书馆怎么走？",
+          "next_id": "npc_library_dir"
+        },
+        {
+          "text": "没事，谢谢。",
+          "next_id": "npc_goodbye"
+        }
+      ]
+    },
+    "npc_library_dir": {
+      "id": "npc_library_dir",
+      "text": "沿着这条路一直走，右转就能看到图书馆了。",
+      "options": [
+        {
+          "text": "谢谢！",
+          "next_id": "npc_thanks"
+        }
+      ]
+    },
+    "npc_thanks": {
+      "id": "npc_thanks",
+      "text": "不客气，祝你学习愉快！",
+      "options": []
+    },
+    "npc_goodbye": {
+      "id": "npc_goodbye",
+      "text": "再见！",
+      "options": []
+    }
+  }
+}

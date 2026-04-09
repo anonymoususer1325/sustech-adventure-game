@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://2o1t4tt50buh"]
+
+[ext_resource type="Script" uid="uid://boqm6ixy42cgj" path="res://scripts/ui/dialog_ui.gd" id="1_w1osw"]
+[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="2_sx8pb"]
+
+[sub_resource type="Gradient" id="Gradient_sx8pb"]
+offsets = PackedFloat32Array(0.2, 0.4)
+colors = PackedColorArray(0, 0, 0, 0.49803922, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_im446"]
+gradient = SubResource("Gradient_sx8pb")
+
+[node name="DialogUI" type="CanvasLayer" unique_id=2115631330]
+script = ExtResource("1_w1osw")
+
+[node name="NpcNameTextureRect" type="TextureRect" parent="." unique_id=1844194242]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.58
+anchor_right = 0.95
+anchor_bottom = 0.68
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_im446")
+
+[node name="NpcNameContainer" type="VBoxContainer" parent="NpcNameTextureRect" unique_id=1066913026]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.2
+anchor_right = 0.96
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NpcName" type="Label" parent="NpcNameTextureRect/NpcNameContainer" unique_id=576854150]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sx8pb")
+theme_override_font_sizes/font_size = 24
+text = "有备而来的测试人员"
+
+[node name="DialogPanel" type="Panel" parent="." unique_id=744885295]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.7
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogContentContainer" type="VBoxContainer" parent="DialogPanel" unique_id=2008372051]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.14
+anchor_right = 0.96
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogContent" type="Label" parent="DialogPanel/DialogContentContainer" unique_id=501595216]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sx8pb")
+theme_override_font_sizes/font_size = 24
+text = "咕→咕↘嘎→嘎↘！！咕↗咕↘嘎↗嘎↘！！
+你干→嘛↗↘，哎哟
+警告：此文本为测试用默认对话文本，请务必在实例化时修改此文本"
+
+[node name="OptionsContainer" type="VBoxContainer" parent="." unique_id=652393643]
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.3
+anchor_right = 0.95
+anchor_bottom = 0.68
+grow_horizontal = 2
+grow_vertical = 2

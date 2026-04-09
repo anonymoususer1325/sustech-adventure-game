@@ -12,7 +12,7 @@ var is_running: bool = false
 var facing_direction: Vector2 = Vector2.DOWN
 
 # 动画节点
-@onready var animated_sprite = $AnimatedSprite2D
+@onready var animated_sprite = $PlayerAnimatedSprite
 
 func _ready():
 	# 确保初始动画正确
