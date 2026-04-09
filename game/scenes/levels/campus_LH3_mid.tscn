@@ -94,9 +94,6 @@ tile_set = ExtResource("10_trukd")
 visible = false
 tile_set = ExtResource("11_u1vhr")
 
-[node name="Player" parent="." unique_id=642336814 instance=ExtResource("5_hbykn")]
-position = Vector2(144, -16)
-
 [node name="PauseMenu" parent="." unique_id=1608922808 instance=ExtResource("6_n1p8n")]
 
 [node name="LeftTeleportArea" parent="." unique_id=1122726686 groups=["teleport_area"] instance=ExtResource("14_nva0k")]
@@ -108,5 +105,12 @@ target_spawn_point = "LH3MidMarker"
 [node name="LeftMarker" type="Marker2D" parent="." unique_id=1409719964]
 position = Vector2(16, -80)
 
-[node name="Npc001" parent="." unique_id=879473222 instance=ExtResource("15_hraxc")]
+[node name="YSort" type="Node2D" parent="." unique_id=696952634]
+y_sort_enabled = true
+
+[node name="Npc001" parent="YSort" unique_id=879473222 instance=ExtResource("15_hraxc")]
 position = Vector2(512, -160)
+
+[node name="Player" parent="YSort" unique_id=642336814 instance=ExtResource("5_hbykn")]
+y_sort_enabled = true
+position = Vector2(144, -16)
