@@ -86,7 +86,10 @@ tile_set = ExtResource("10_q4hcs")
 visible = false
 tile_set = ExtResource("11_o2alw")
 
-[node name="Player" parent="." unique_id=642336814 instance=ExtResource("5_hbykn")]
-position = Vector2(2, 2)
-
 [node name="PauseMenu" parent="." unique_id=1608922808 instance=ExtResource("6_n1p8n")]
+
+[node name="YSort" type="Node2D" parent="." unique_id=250608436]
+y_sort_enabled = true
+
+[node name="Player" parent="YSort" unique_id=642336814 instance=ExtResource("5_hbykn")]
+position = Vector2(2, 2)

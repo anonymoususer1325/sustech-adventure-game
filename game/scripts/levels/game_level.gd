@@ -4,7 +4,7 @@ extends Node2D
 @export var north_vector: Vector2 = Vector2(0, -1)
 
 @onready var pause_menu = $PauseMenu
-@onready var player = $Player   # 假设玩家节点在根节点下
+@onready var player = $YSort/Player   # 假设玩家节点在根节点下
 
 func _ready():
 	# 更新场景管理器的北方向量
