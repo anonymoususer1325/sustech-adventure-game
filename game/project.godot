@@ -24,6 +24,7 @@ SceneManager="*uid://b12gj3c7njyia"
 GameState="*uid://b464ns4la7usk"
 LightEffectManager="*uid://cvbjggsx3d67n"
 InteractionManager="*uid://dy2xbd6q7bwe7"
+GameDialogManager="*uid://c6c1pfnuhta4x"
 
 [gui]
 
