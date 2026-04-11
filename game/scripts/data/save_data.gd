@@ -17,9 +17,17 @@ const SAVE_VERSION = 1
 static func new_save_data() -> Dictionary:
 	return {
 		"version": SAVE_VERSION,
-		"scene_path": "",
+		"scene_path": "res://...",
 		"player_x": 0.0,
 		"player_y": 0.0,
 		"completed_tasks": [],
-		"inventory": []
-	}
+		"inventory": [],
+		"facing_x": 0.0,
+		"facing_y": -1.0,
+		# 新增元数据
+		"main_quest_progress": "寻找学生证",      # 主线任务描述或ID
+		"side_quests_completed": 3,               # 已完成支线数量
+		"current_focus_task": "去图书馆还书",     # 当前焦点任务描述
+		"play_time_seconds": 3600,                # 总游玩秒数
+		"save_time": "2025-04-10 15:30:00"        # 保存时间字符串
+}
