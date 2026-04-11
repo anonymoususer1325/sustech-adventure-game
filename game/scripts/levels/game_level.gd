@@ -120,7 +120,7 @@ func _on_resume_pressed():
 	toggle_pause_menu()
 
 func _on_save_pressed():
-	SaveManager.save_game()
+	SaveManager.save_game(0)
 	# 可以显示短暂提示，如 "游戏已保存"
 	print("游戏已保存")
 

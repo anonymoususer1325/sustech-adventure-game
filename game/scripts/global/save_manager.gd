@@ -2,23 +2,31 @@
 extends Node
 
 const SAVE_VERSION = 1
-const SAVE_PATH = "user://save.dat"   # 存档文件路径
+const SAVE_DIR = "user://saves/"
+const SAVE_FILENAME = "save_{0}.dat"   # save_0.dat, save_1.dat, ...
 
 var pending_load_data = null   # 允许为 null 或 Vector2
 
+func get_save_path(slot: int) -> String:
+	return SAVE_DIR + SAVE_FILENAME.format([str(slot)])
+
 # 保存游戏
-func save_game() -> bool:
+func save_game(slot: int) -> bool:
+	var path = get_save_path(slot)
+	var dir = DirAccess.open("user://")
+	if not dir.dir_exists("saves"):
+		dir.make_dir("saves")
 	var data = collect_save_data()
 	var json_string = JSON.stringify(data, "\t")  # 格式化输出，便于调试
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var file = FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
 		print("无法打开存档文件进行写入")
 		return false
 	file.store_string(json_string)
 	# 可选：保存一份明文校验，或简单加密
 	file.close()
-	print("游戏已保存至：", SAVE_PATH)
-	print("存档实际路径: ", OS.get_user_data_dir() + "/save.dat")
+	print("游戏已保存")
+	print("存档实际路径: ", OS.get_user_data_dir())
 	return true
 	
 func get_user_data_dir() -> String:
@@ -48,12 +56,45 @@ func collect_save_data() -> Dictionary:
 	data["facing_x"] = facing.x
 	data["facing_y"] = facing.y
 	
+	# 元数据（需要从游戏管理器获取）
+	data["main_quest_progress"] = get_main_quest_progress()
+	data["side_quests_completed"] = get_side_quests_completed()
+	data["current_focus_task"] = get_current_focus_task()
+	data["play_time_seconds"] = get_play_time()
+	data["save_time"] = Time.get_datetime_string_from_system()  # 当前系统时间
+	
 	return data
+
+func get_save_metadata(slot: int) -> Dictionary:
+	var path = get_save_path(slot)
+	if not FileAccess.file_exists(path):
+		return {}   # 空存档
+	var file = FileAccess.open(path, FileAccess.READ)
+	var content = file.get_as_text()
+	file.close()
+	var json = JSON.new()
+	if json.parse(content) != OK:
+		return {}
+	var data = json.get_data()
+	# 提取元数据字段，不返回完整游戏状态
+	return {
+		"exists": true,
+		"main_quest_progress": data.get("main_quest_progress", ""),
+		"side_quests_completed": data.get("side_quests_completed", 0),
+		"current_focus_task": data.get("current_focus_task", ""),
+		"play_time_seconds": data.get("play_time_seconds", 0),
+		"save_time": data.get("save_time", ""),
+		"scene_path": data.get("scene_path", "")  # 可选，用于预览
+	}
 
 # 以下是需要从游戏中获取数据的函数，具体实现取决于你的项目结构
 # 暂时可以用示例数据，后续与真实模块对接
 
 func get_player_facing() -> Vector2:
+	# 优先使用 InteractionManager 中缓存的玩家引用
+	if InteractionManager and InteractionManager.player:
+		return InteractionManager.player.facing_direction
+	# 后备：尝试从当前场景根节点直接查找（兼容旧结构）
 	var current_scene = get_tree().current_scene
 	if current_scene:
 		var player = current_scene.get_node_or_null("Player")
@@ -72,10 +113,17 @@ func get_current_scene_path() -> String:
 		return ""
 
 func get_player_position() -> Vector2:
+	# 优先使用 InteractionManager 中缓存的玩家引用
+	if InteractionManager and InteractionManager.player:
+		return InteractionManager.player.global_position
+	# 后备：尝试从当前场景根节点直接查找（兼容旧结构）
 	var current_scene = get_tree().current_scene
+	#print("尝试获取 current scene: ", current_scene)
 	if current_scene:
 		var player = current_scene.get_node_or_null("Player")
+		#print("尝试获取 player: ", player)
 		if player:
+			#print("player.position: ", player.position)
 			return player.position
 	return Vector2.ZERO
 
@@ -92,18 +140,37 @@ func get_inventory_items() -> Array:
 		return get_node("/root/InventoryManager").get_items()
 	return []
 
+# ========== 占位函数（待任务系统完善后替换） ==========
+func get_main_quest_progress() -> String:
+	# 模拟主线进度
+	return "寻找学生证"
+
+func get_side_quests_completed() -> int:
+	# 模拟支线完成数量
+	return 0
+
+func get_current_focus_task() -> String:
+	# 模拟当前焦点任务
+	return "前往图书馆"
+
+func get_play_time() -> int:
+	# 模拟游玩时间（秒）
+	# 实际应该从 GameState 或其他全局变量获取
+	return 0
+
 # save_manager.gd（续）
 
 # 待恢复的存档数据（全局变量，供新场景读取）
 var pending_save_data: Dictionary = {}
 
 # 读取存档文件
-func load_game() -> bool:
-	if not FileAccess.file_exists(SAVE_PATH):
+func load_game(slot: int) -> bool:
+	var path = get_save_path(slot)
+	if not FileAccess.file_exists(path):
 		print("存档文件不存在")
 		return false
 	
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
 	if file == null:
 		print("无法打开存档文件")
 		return false

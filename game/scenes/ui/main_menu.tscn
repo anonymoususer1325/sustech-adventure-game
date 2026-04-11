@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjstcofnlk8o2" path="res://scripts/ui/main_menu.gd" id="1_sl1te"]
 [ext_resource type="FontFile" uid="uid://dx0jy8f3giaa1" path="res://assets/fonts/SourceHanSansSC-Bold.otf" id="2_fe2o3"]
-[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="3_1g8jr"]
+[ext_resource type="PackedScene" uid="uid://bekwxy1i2r3qg" path="res://scenes/ui/save_select_ui.tscn" id="3_1g8jr"]
 
 [node name="MainMenu" type="Control" unique_id=800170858]
 layout_mode = 3
@@ -34,24 +34,28 @@ grow_vertical = 2
 
 [node name="btn_explore" type="Button" parent="OptionContainer" unique_id=380683687]
 layout_mode = 2
+mouse_filter = 2
 action_mode = 0
 button_mask = 0
 text = "独自探索"
 
 [node name="btn_multi" type="Button" parent="OptionContainer" unique_id=919136093]
 layout_mode = 2
+mouse_filter = 2
 action_mode = 0
 button_mask = 0
 text = "多人切磋"
 
 [node name="btn_settings" type="Button" parent="OptionContainer" unique_id=1913354513]
 layout_mode = 2
+mouse_filter = 2
 action_mode = 0
 button_mask = 0
 text = "设置"
 
 [node name="btn_quit" type="Button" parent="OptionContainer" unique_id=1590025354]
 layout_mode = 2
+mouse_filter = 2
 action_mode = 0
 button_mask = 0
 text = "下次再见"
@@ -67,43 +71,9 @@ anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelContainer" type="VBoxContainer" parent="ExplorePanel" unique_id=2102237685]
+[node name="SaveSelectUi" parent="ExplorePanel" unique_id=78393896 instance=ExtResource("3_1g8jr")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.15
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="ExplorePanel/LabelContainer" unique_id=1208761449]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_fe2o3")
-theme_override_font_sizes/font_size = 24
-text = "独自探索模式"
-
-[node name="OptionNewGameContainer" type="VBoxContainer" parent="ExplorePanel" unique_id=289787946]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.15
-anchor_right = 0.25
-anchor_bottom = 0.35
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="btn_new_game" type="Button" parent="ExplorePanel/OptionNewGameContainer" unique_id=861470848]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_1g8jr")
-button_mask = 0
-text = "开始新游戏"
-
-[node name="btn_load_game" type="Button" parent="ExplorePanel/OptionNewGameContainer" unique_id=1522591079]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_1g8jr")
-button_mask = 0
-text = "加载存档"
+size_flags_vertical = 3
 
 [node name="MultiPanel" type="Panel" parent="." unique_id=937410302]
 visible = false
@@ -122,12 +92,13 @@ anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
-anchor_bottom = 0.15
+anchor_bottom = 0.12
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="MultiPanel/LabelContainer" unique_id=1187741782]
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_fe2o3")
 theme_override_font_sizes/font_size = 24
 text = "多人切磋模式"
@@ -149,12 +120,13 @@ anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
-anchor_bottom = 0.15
+anchor_bottom = 0.12
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="SettingsPanel/LabelContainer" unique_id=271138743]
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_fe2o3")
 theme_override_font_sizes/font_size = 24
 text = "设置"

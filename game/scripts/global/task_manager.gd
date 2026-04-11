@@ -19,3 +19,7 @@ func complete_task(task_id: String):
 	if not completed_tasks.has(task_id):
 		completed_tasks.append(task_id)
 		# 可选：发射信号
+
+func reset():
+	completed_tasks.clear()
+	# 如果有其他状态变量（如当前任务、主线进度等），一并重置

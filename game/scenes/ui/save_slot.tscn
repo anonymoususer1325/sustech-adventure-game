@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://bjb4g7osgiaux"]
+
+[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="1_tk20w"]
+[ext_resource type="Script" uid="uid://dy0ij2r1insl0" path="res://scripts/ui/save_slot.gd" id="2_l5iig"]
+
+[node name="SaveSlot" type="Control" unique_id=1330453502]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("2_l5iig")
+
+[node name="InfoButton" type="Button" parent="." unique_id=424286611]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("1_tk20w")
+text = "SaveInfo"
+
+[node name="Action" type="Control" parent="." unique_id=1646773134]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoContainer" type="VBoxContainer" parent="Action" unique_id=1881620168]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.14
+anchor_right = 0.9
+anchor_bottom = 0.4
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Info" type="Label" parent="Action/InfoContainer" unique_id=1074419728]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_tk20w")
+text = "选择需要对此存档进行的操作。"
+
+[node name="ButtonContainer" type="HBoxContainer" parent="Action" unique_id=874368771]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.6
+anchor_right = 0.9
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Read" type="Button" parent="Action/ButtonContainer" unique_id=1387269174]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../Delete")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("1_tk20w")
+button_mask = 0
+text = "读取"
+
+[node name="Delete" type="Button" parent="Action/ButtonContainer" unique_id=1390204865]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Read")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../Cancel")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.8745098, 0.43529412, 0.43529412, 1)
+theme_override_colors/font_focus_color = Color(0.9490196, 0.47058824, 0.47058824, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.49803922, 0.49803922, 1)
+theme_override_fonts/font = ExtResource("1_tk20w")
+button_mask = 0
+text = "删除"
+
+[node name="Cancel" type="Button" parent="Action/ButtonContainer" unique_id=440094186]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Delete")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("1_tk20w")
+button_mask = 0
+text = "取消"
+
+[node name="Confirm" type="Control" parent="." unique_id=652140687]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoContainer" type="VBoxContainer" parent="Confirm" unique_id=1313444080]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.14
+anchor_right = 0.9
+anchor_bottom = 0.4
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Info" type="Label" parent="Confirm/InfoContainer" unique_id=806098675]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(1, 0.49803922, 0.49803922, 1)
+theme_override_fonts/font = ExtResource("1_tk20w")
+text = "删除的存档将永远无法恢复！
+真的要删除吗？"
+
+[node name="ButtonContainer" type="HBoxContainer" parent="Confirm" unique_id=516732310]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.6
+anchor_right = 0.9
+anchor_bottom = 0.86
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConfirmDelete" type="Button" parent="Confirm/ButtonContainer" unique_id=904327483]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../Cancel")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.8745098, 0.43529412, 0.43529412, 1)
+theme_override_colors/font_focus_color = Color(0.9490196, 0.47058824, 0.47058824, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.49803922, 0.49803922, 1)
+theme_override_fonts/font = ExtResource("1_tk20w")
+button_mask = 0
+text = "确认删除"
+
+[node name="Cancel" type="Button" parent="Confirm/ButtonContainer" unique_id=812959257]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../ConfirmDelete")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("1_tk20w")
+button_mask = 0
+text = "取消"

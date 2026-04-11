@@ -34,3 +34,6 @@ func remove_item(item_id: String, count: int = 1):
 			if items[i]["count"] <= 0:
 				items.remove_at(i)
 			return
+
+func reset():
+	items.clear()
