@@ -7,6 +7,8 @@ const SAVE_FILENAME = "save_{0}.dat"   # save_0.dat, save_1.dat, ...
 
 var pending_load_data = null   # 允许为 null 或 Vector2
 
+var current_slot: int = -1
+
 func get_save_path(slot: int) -> String:
 	return SAVE_DIR + SAVE_FILENAME.format([str(slot)])
 
@@ -25,6 +27,8 @@ func save_game(slot: int) -> bool:
 	file.store_string(json_string)
 	# 可选：保存一份明文校验，或简单加密
 	file.close()
+	
+	current_slot = slot
 	print("游戏已保存")
 	print("存档实际路径: ", OS.get_user_data_dir())
 	return true
@@ -153,10 +157,9 @@ func get_current_focus_task() -> String:
 	# 模拟当前焦点任务
 	return "前往图书馆"
 
-func get_play_time() -> int:
-	# 模拟游玩时间（秒）
-	# 实际应该从 GameState 或其他全局变量获取
-	return 0
+# 保存时
+func get_play_time() -> float:
+	return GameClock.get_total_seconds() if GameClock else 0.0
 
 # save_manager.gd（续）
 
@@ -204,11 +207,14 @@ func load_game(slot: int) -> bool:
 	# 解析成功后，从 data 字典中获取坐标
 	var target_pos = Vector2(data.get("player_x", 0), data.get("player_y", 0))
 	var target_facing = Vector2(data.get("facing_x", 0), data.get("facing_y", 1))  # 默认向下
+	var play_time = data.get("play_time_seconds", 0.0)   # 获取游玩时长（浮点数）
+	
 	pending_load_data = {
 		"position": target_pos,
-		"facing": target_facing
+		"facing": target_facing,
+		"play_time": play_time
 	}
-	print("load_game: 设置 pending_load_position = ", target_pos, ", facing = ", target_facing)   # 此时 target_pos 已定义
+	print("load_game: 设置 pending_load_data = ", pending_load_data)
 	
 	# 切换到存档中的场景
 	var scene_path = data.get("scene_path", "")
@@ -217,6 +223,7 @@ func load_game(slot: int) -> bool:
 		return false
 	
 	get_tree().change_scene_to_file(scene_path)
+	current_slot = slot
 	return true
 
 # 获取并清除待加载位置（由新场景调用）
