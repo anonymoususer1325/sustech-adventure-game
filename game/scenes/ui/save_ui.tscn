@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://b1422ltv5oxly"]
+
+[ext_resource type="Script" uid="uid://cuxbfolc1fqt2" path="res://scripts/ui/save_ui.gd" id="1_hh3jn"]
+[ext_resource type="FontFile" uid="uid://dx0jy8f3giaa1" path="res://assets/fonts/SourceHanSansSC-Bold.otf" id="2_ehfk1"]
+[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="3_sjyho"]
+
+[node name="SaveUi" type="Panel" unique_id=277271487]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hh3jn")
+
+[node name="LabelContainer" type="Control" parent="." unique_id=2126179632]
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.12
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="LabelContainer" unique_id=505162504]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -17.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_ehfk1")
+theme_override_font_sizes/font_size = 24
+text = "请选择需要保存的位置。"
+
+[node name="CancelButtonContainer" type="Control" parent="." unique_id=2107998741]
+layout_mode = 1
+anchor_left = 0.75
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.12
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CancelButton" type="Button" parent="CancelButtonContainer" unique_id=525921899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("3_sjyho")
+action_mode = 0
+button_mask = 0
+text = "取消"
+
+[node name="SavesGridContainer" type="GridContainer" parent="." unique_id=2108113157]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.15
+anchor_right = 0.95
+anchor_bottom = 0.92
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2

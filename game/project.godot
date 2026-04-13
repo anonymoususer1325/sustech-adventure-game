@@ -25,6 +25,7 @@ GameState="*uid://b464ns4la7usk"
 LightEffectManager="*uid://cvbjggsx3d67n"
 InteractionManager="*uid://dy2xbd6q7bwe7"
 GameDialogManager="*uid://c6c1pfnuhta4x"
+GameClock="*uid://c7mmxvgjtyxwj"
 
 [gui]
 
