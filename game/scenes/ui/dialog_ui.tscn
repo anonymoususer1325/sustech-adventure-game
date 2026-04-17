@@ -11,10 +11,17 @@ metadata/_snap_enabled = true
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_im446"]
 gradient = SubResource("Gradient_sx8pb")
 
-[node name="DialogUI" type="CanvasLayer" unique_id=2115631330]
+[node name="DialogUI" type="Control" unique_id=617219385]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_w1osw")
 
 [node name="NpcNameTextureRect" type="TextureRect" parent="." unique_id=1844194242]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.58
@@ -41,6 +48,7 @@ theme_override_font_sizes/font_size = 24
 text = "有备而来的测试人员"
 
 [node name="DialogPanel" type="Panel" parent="." unique_id=744885295]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.7
@@ -68,6 +76,7 @@ text = "咕→咕↘嘎→嘎↘！！咕↗咕↘嘎↗嘎↘！！
 警告：此文本为测试用默认对话文本，请务必在实例化时修改此文本"
 
 [node name="OptionsContainer" type="VBoxContainer" parent="." unique_id=652393643]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.7
 anchor_top = 0.3

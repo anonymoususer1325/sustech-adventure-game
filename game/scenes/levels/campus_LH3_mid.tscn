@@ -13,6 +13,7 @@
 [ext_resource type="TileSet" uid="uid://dhc7ejkfx8s5k" path="res://assets/tilesets/buildings_deco.tres" id="9_dxq2o"]
 [ext_resource type="TileSet" uid="uid://bvhkg5i16b36x" path="res://assets/tilesets/overlay.tres" id="10_trukd"]
 [ext_resource type="TileSet" uid="uid://bck55ay7ocleg" path="res://assets/tilesets/collision.tres" id="11_u1vhr"]
+[ext_resource type="PackedScene" uid="uid://2o1t4tt50buh" path="res://scenes/ui/dialog_ui.tscn" id="12_prtvk"]
 [ext_resource type="PackedScene" uid="uid://d0mmjkij0ap1m" path="res://scenes/objects/teleport_area.tscn" id="14_nva0k"]
 [ext_resource type="PackedScene" uid="uid://idgvfb307cmy" path="res://scenes/objects/npc.tscn" id="15_hraxc"]
 
@@ -95,6 +96,16 @@ visible = false
 tile_set = ExtResource("11_u1vhr")
 
 [node name="PauseMenu" parent="." unique_id=1608922808 instance=ExtResource("6_n1p8n")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=537991081]
+
+[node name="DialogUI" parent="CanvasLayer" unique_id=1256251452 instance=ExtResource("12_prtvk")]
+visible = false
+visibility_layer = 512
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = -2.0
 
 [node name="LeftTeleportArea" parent="." unique_id=1122726686 groups=["teleport_area"] instance=ExtResource("14_nva0k")]
 position = Vector2(0, -80)

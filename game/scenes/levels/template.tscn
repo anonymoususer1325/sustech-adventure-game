@@ -92,4 +92,4 @@ tile_set = ExtResource("11_o2alw")
 y_sort_enabled = true
 
 [node name="Player" parent="YSort" unique_id=642336814 instance=ExtResource("5_hbykn")]
-position = Vector2(2, 2)
+position = Vector2(-42, 48)

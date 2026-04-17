@@ -96,6 +96,8 @@ func _distance_squared(a: Vector2, b: Vector2) -> float:
 
 # 玩家按下交互键时调用（需要在玩家输入中处理）
 func interact_with_focus():
+	if GameState.is_dialog_active:
+		return   # 对话中不能触发新交互
 	if current_focus:
 		current_focus.interact()
 	else:

@@ -18,7 +18,12 @@ func _ready():
 	# 确保初始动画正确
 	update_animation(Vector2.ZERO)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:    
+	# 对话时禁止移动
+	if GameState.is_dialog_active:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 		# 移动锁定检查
 	if GameState.movement_locked:
 		velocity = Vector2.ZERO

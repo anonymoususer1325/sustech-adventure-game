@@ -49,11 +49,13 @@ func start_dialog(dialog_id: String, npc: Node) -> bool:
 		print("对话 ID 不存在: ", dialog_id)
 		return false
 	
+	
 	print("对话开始, ID : ", dialog_id)
 	_current_dialog_id = dialog_id
 	_current_dialog_node = _dialogs[dialog_id]
 	_current_npc = npc
 	dialog_started.emit(_current_dialog_node, _current_npc)
+	GameState.is_dialog_active = true  
 	return true
 
 # 选择选项（由 UI 调用）
@@ -78,6 +80,21 @@ func select_option(option_index: int):
 		else:
 			print("后续对话 ID 不存在: ", next_id)
 			end_dialog()
+func advance_dialog():
+	if not is_dialog_active():
+		return
+	var options = _current_dialog_node.get("options", [])
+	if not options.is_empty():
+		# 有选项时，默认选择第一个（或需要用户选择，这里简单处理）
+		select_option(0)
+	else:
+		var next_id = _current_dialog_node.get("next_id", "")
+		if next_id != "" and _dialogs.has(next_id):
+			_current_dialog_id = next_id
+			_current_dialog_node = _dialogs[next_id]
+			dialog_updated.emit(_current_dialog_node, _current_npc)
+		else:
+			end_dialog()	
 
 # 结束对话
 func end_dialog():
@@ -85,6 +102,7 @@ func end_dialog():
 	_current_dialog_node = {}
 	_current_npc = null
 	dialog_ended.emit()
+	GameState.is_dialog_active = false  
 
 # 获取当前对话节点（供 UI 查询）
 func get_current_dialog_node() -> Dictionary:
