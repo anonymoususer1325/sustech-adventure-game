@@ -121,6 +121,11 @@ func restore_from_save(data: Dictionary):
 # ========== 输入处理 ==========
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
+		# 如果背包打开，优先关闭背包
+		var backpack = _get_backpack()
+		if backpack and backpack.visible:
+			backpack.close()
+			return
 		toggle_pause_menu()
 
 func toggle_pause_menu():
@@ -145,3 +150,10 @@ func _on_save_pressed():
 func _on_main_menu_pressed():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+
+# 获取背包UI节点
+func _get_backpack():
+	var layer = get_node_or_null("BackpackLayer")
+	if layer:
+		return layer.get_node_or_null("BackpackUI")
+	return null

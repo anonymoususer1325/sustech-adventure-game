@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://cwxysvhkax60o"]
+
+[ext_resource type="Script" uid="uid://bqs3ns2q52rby" path="res://scripts/ui/backpack_ui.gd" id="1_2d63f"]
+[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="2_0sr3u"]
+[ext_resource type="FontFile" uid="uid://dx0jy8f3giaa1" path="res://assets/fonts/SourceHanSansSC-Bold.otf" id="3_jy0cy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.15, 0.15, 0.18, 0.92)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_detail"]
+bg_color = Color(0.2, 0.2, 0.25, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_use_btn"]
+bg_color = Color(0.3, 0.55, 0.3, 1.0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close"]
+bg_color = Color(0.5, 0.2, 0.2, 1.0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="BackpackUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_2d63f")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(760, 480)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Title" type="Label" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("3_jy0cy")
+theme_override_font_sizes/font_size = 24
+text = "背包"
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 420.0
+offset_bottom = 420.0
+columns = 4
+
+[node name="EmptyHint" type="Label" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 180.0
+offset_right = 420.0
+offset_bottom = 220.0
+theme_override_fonts/font = ExtResource("2_0sr3u")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+text = "背包是空的……"
+
+[node name="DetailPanel" type="Panel" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 60.0
+offset_right = 760.0
+offset_bottom = 360.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_detail")
+
+[node name="ItemName" type="Label" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 300.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("3_jy0cy")
+theme_override_font_sizes/font_size = 22
+text = ""
+
+[node name="ItemDescription" type="Label" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 60.0
+offset_right = 300.0
+offset_bottom = 160.0
+autowrap_mode = 2
+theme_override_fonts/font = ExtResource("2_0sr3u")
+theme_override_font_sizes/font_size = 16
+text = ""
+
+[node name="ItemCount" type="Label" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 170.0
+offset_right = 300.0
+offset_bottom = 200.0
+theme_override_fonts/font = ExtResource("2_0sr3u")
+theme_override_font_sizes/font_size = 16
+text = ""
+
+[node name="UseButton" type="Button" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 210.0
+offset_right = 250.0
+offset_bottom = 250.0
+theme_override_fonts/font = ExtResource("2_0sr3u")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_use_btn")
+text = "使用"
+
+[node name="CloseButton" type="Button" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 16.0
+offset_right = 740.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_0sr3u")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_close")
+text = "关闭"

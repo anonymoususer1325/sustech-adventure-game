@@ -1,0 +1,104 @@
+{
+  "items": {
+    "student_card": {
+      "id": "student_card",
+      "name": "学生证",
+      "description": "你的南科大校园身份证明，很多地方都需要用到它。",
+      "icon_path": "",
+      "stackable": false,
+      "max_stack": 1,
+      "use_effect": "unlock_area",
+      "use_effect_params": {}
+    },
+    "phone": {
+      "id": "phone",
+      "name": "手机",
+      "description": "可以用来查看邮件和消息，是校园生活不可或缺的工具。",
+      "icon_path": "",
+      "stackable": false,
+      "max_stack": 1,
+      "use_effect": "open_mail",
+      "use_effect_params": {}
+    },
+    "radar": {
+      "id": "radar",
+      "name": "雷达",
+      "description": "多人模式道具，可以在一段时间内显示附近玩家的位置。",
+      "icon_path": "",
+      "stackable": true,
+      "max_stack": 5,
+      "use_effect": "reveal_map",
+      "use_effect_params": {
+        "duration": 10.0,
+        "radius": 200.0
+      }
+    },
+    "lychee": {
+      "id": "lychee",
+      "name": "荔枝",
+      "description": "南科大校园特产，清甜可口。可以用来恢复体力。",
+      "icon_path": "",
+      "stackable": true,
+      "max_stack": 99,
+      "use_effect": "heal",
+      "use_effect_params": {
+        "heal_amount": 20
+      }
+    },
+    "library_card": {
+      "id": "library_card",
+      "name": "图书馆借阅卡",
+      "description": "凭此卡可进入图书馆并借阅书籍。",
+      "icon_path": "",
+      "stackable": false,
+      "max_stack": 1,
+      "use_effect": "unlock_area",
+      "use_effect_params": {}
+    },
+    "key": {
+      "id": "key",
+      "name": "钥匙",
+      "description": "一把神秘的钥匙，不知道能打开什么门。",
+      "icon_path": "",
+      "stackable": true,
+      "max_stack": 10,
+      "use_effect": "unlock_door",
+      "use_effect_params": {}
+    },
+    "note": {
+      "id": "note",
+      "name": "便条",
+      "description": "上面写着一些有用的信息……",
+      "icon_path": "",
+      "stackable": true,
+      "max_stack": 99,
+      "use_effect": "read_message",
+      "use_effect_params": {}
+    },
+    "speed_boost": {
+      "id": "speed_boost",
+      "name": "加速道具",
+      "description": "使用后短时间内提升移动速度。",
+      "icon_path": "",
+      "stackable": true,
+      "max_stack": 10,
+      "use_effect": "speed_up",
+      "use_effect_params": {
+        "duration": 5.0,
+        "speed_multiplier": 1.5
+      }
+    },
+    "invisibility": {
+      "id": "invisibility",
+      "name": "隐身道具",
+      "description": "使用后短时间内让其他玩家无法看见你（多人模式）。",
+      "icon_path": "",
+      "stackable": true,
+      "max_stack": 5,
+      "use_effect": "become_invisible",
+      "use_effect_params": {
+        "duration": 3.0
+      }
+    }
+  }
+}

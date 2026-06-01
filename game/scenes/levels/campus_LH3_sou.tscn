@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://clfn53xkwsbqt" path="res://scenes/characters/player.tscn" id="12_eiic3"]
 [ext_resource type="PackedScene" uid="uid://cc40g7jtk0kea" path="res://scenes/ui/pause_menu.tscn" id="13_2mu1a"]
 [ext_resource type="PackedScene" uid="uid://d0mmjkij0ap1m" path="res://scenes/objects/teleport_area.tscn" id="14_fj7dn"]
+[ext_resource type="PackedScene" uid="uid://cwxysvhkax60o" path="res://scenes/ui/backpack_ui.tscn" id="15_backpack"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l1ej1"]
 light_mode = 2
@@ -91,6 +92,12 @@ visible = false
 tile_set = ExtResource("11_45fby")
 
 [node name="PauseMenu" parent="." unique_id=1608922808 instance=ExtResource("13_2mu1a")]
+
+[node name="BackpackLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="BackpackUI" parent="BackpackLayer" unique_id=1938467130 instance=ExtResource("15_backpack")]
+visible = false
 
 [node name="TeleportAreaLH3Mid" parent="." unique_id=1122726686 groups=["teleport_area"] instance=ExtResource("14_fj7dn")]
 position = Vector2(416, -1360)

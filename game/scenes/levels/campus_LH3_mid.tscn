@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://2o1t4tt50buh" path="res://scenes/ui/dialog_ui.tscn" id="12_prtvk"]
 [ext_resource type="PackedScene" uid="uid://d0mmjkij0ap1m" path="res://scenes/objects/teleport_area.tscn" id="14_nva0k"]
 [ext_resource type="PackedScene" uid="uid://idgvfb307cmy" path="res://scenes/objects/npc.tscn" id="15_hraxc"]
+[ext_resource type="PackedScene" uid="uid://cwxysvhkax60o" path="res://scenes/ui/backpack_ui.tscn" id="16_backpack"]
+[ext_resource type="PackedScene" uid="uid://btxgckw4twl08" path="res://scenes/objects/item_pickup.tscn" id="17_pickup"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nva0k"]
 light_mode = 2
@@ -97,6 +99,12 @@ tile_set = ExtResource("11_u1vhr")
 
 [node name="PauseMenu" parent="." unique_id=1608922808 instance=ExtResource("6_n1p8n")]
 
+[node name="BackpackLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="BackpackUI" parent="BackpackLayer" unique_id=1938467130 instance=ExtResource("16_backpack")]
+visible = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=537991081]
 
 [node name="DialogUI" parent="CanvasLayer" unique_id=1256251452 instance=ExtResource("12_prtvk")]
@@ -125,3 +133,13 @@ position = Vector2(512, -160)
 [node name="Player" parent="YSort" unique_id=642336814 instance=ExtResource("5_hbykn")]
 y_sort_enabled = true
 position = Vector2(144, -16)
+
+[node name="TestItemLychee" parent="YSort" instance=ExtResource("17_pickup")]
+position = Vector2(224, -16)
+item_id = "lychee"
+item_count = 3
+
+[node name="TestItemSpeedBoost" parent="YSort" instance=ExtResource("17_pickup")]
+position = Vector2(304, -16)
+item_id = "speed_boost"
+item_count = 1

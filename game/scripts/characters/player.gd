@@ -88,4 +88,36 @@ func get_direction_string(dir: Vector2) -> String:
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
+		# 背包打开时不触发交互
+		var backpack = _get_backpack_ui()
+		if backpack and backpack.visible:
+			return
 		InteractionManager.interact_with_focus()
+	
+	if event.is_action_pressed("toggle_inventory"):
+		# 对话中不打开背包
+		if GameState.is_dialog_active:
+			return
+		# 暂停菜单打开时不打开背包
+		var pause = _get_pause_menu()
+		if pause and pause.visible:
+			return
+		var backpack = _get_backpack_ui()
+		if backpack:
+			backpack.toggle()
+
+# 辅助：从当前场景获取 BackpackUI 节点
+func _get_backpack_ui():
+	var scene = get_tree().current_scene
+	if scene:
+		var layer = scene.get_node_or_null("BackpackLayer")
+		if layer:
+			return layer.get_node_or_null("BackpackUI")
+	return null
+
+# 辅助：从当前场景获取 PauseMenu 节点
+func _get_pause_menu():
+	var scene = get_tree().current_scene
+	if scene:
+		return scene.get_node_or_null("PauseMenu")
+	return null

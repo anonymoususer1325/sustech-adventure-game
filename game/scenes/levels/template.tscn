@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cc40g7jtk0kea" path="res://scenes/ui/pause_menu.tscn" id="6_n1p8n"]
 [ext_resource type="TileSet" uid="uid://dcf7c2b1vpnrq" path="res://assets/tilesets/tall_props.tres" id="7_5hg7i"]
 [ext_resource type="TileSet" uid="uid://due5jitdy0v5c" path="res://assets/tilesets/buildings.tres" id="8_38kbd"]
+[ext_resource type="PackedScene" uid="uid://cwxysvhkax60o" path="res://scenes/ui/backpack_ui.tscn" id="12_backpack"]
 [ext_resource type="TileSet" uid="uid://dhc7ejkfx8s5k" path="res://assets/tilesets/buildings_deco.tres" id="9_tdmmw"]
 [ext_resource type="TileSet" uid="uid://bvhkg5i16b36x" path="res://assets/tilesets/overlay.tres" id="10_q4hcs"]
 [ext_resource type="TileSet" uid="uid://bck55ay7ocleg" path="res://assets/tilesets/collision.tres" id="11_o2alw"]
@@ -87,6 +88,12 @@ visible = false
 tile_set = ExtResource("11_o2alw")
 
 [node name="PauseMenu" parent="." unique_id=1608922808 instance=ExtResource("6_n1p8n")]
+
+[node name="BackpackLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="BackpackUI" parent="BackpackLayer" instance=ExtResource("12_backpack")]
+visible = false
 
 [node name="YSort" type="Node2D" parent="." unique_id=250608436]
 y_sort_enabled = true
