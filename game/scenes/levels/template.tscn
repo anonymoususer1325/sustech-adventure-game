@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cwxysvhkax60o" path="res://scenes/ui/backpack_ui.tscn" id="12_backpack"]
 [ext_resource type="TileSet" uid="uid://dhc7ejkfx8s5k" path="res://assets/tilesets/buildings_deco.tres" id="9_tdmmw"]
 [ext_resource type="TileSet" uid="uid://bvhkg5i16b36x" path="res://assets/tilesets/overlay.tres" id="10_q4hcs"]
+[ext_resource type="PackedScene" uid="uid://c56dbecuerpeg" path="res://scenes/ui/task_ui.tscn" id="13_taskui"]
+[ext_resource type="PackedScene" path="res://scenes/ui/countdown_hud.tscn" id="30_hud"]
 [ext_resource type="TileSet" uid="uid://bck55ay7ocleg" path="res://assets/tilesets/collision.tres" id="11_o2alw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q2cre"]
@@ -94,6 +96,14 @@ process_mode = 3
 
 [node name="BackpackUI" parent="BackpackLayer" instance=ExtResource("12_backpack")]
 visible = false
+
+[node name="TaskLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="TaskUI" parent="TaskLayer" instance=ExtResource("13_taskui")]
+visible = false
+
+[node name="CountdownHud" parent="TaskLayer" instance=ExtResource("30_hud")]
 
 [node name="YSort" type="Node2D" parent="." unique_id=250608436]
 y_sort_enabled = true

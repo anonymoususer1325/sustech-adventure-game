@@ -1,0 +1,18 @@
+{
+  "tasks": {
+    "gather_supplies": {
+      "id": "gather_supplies",
+      "name": "收集校园物资",
+      "description": "在校园各处收集以下物品：学生证(宿舍)、借阅卡(图书馆)、便条(中心区)、铅笔(教学楼)。集齐后送往教学楼交付。",
+      "max_progress": 4,
+      "hidden": false
+    },
+    "deliver_to_teaching": {
+      "id": "deliver_to_teaching",
+      "name": "将物资送到教学楼",
+      "description": "所有物资已集齐！将它们送到教学楼的指定区域完成交付。",
+      "max_progress": 1,
+      "hidden": false
+    }
+  }
+}

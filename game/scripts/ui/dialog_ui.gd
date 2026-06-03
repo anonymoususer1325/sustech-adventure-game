@@ -11,7 +11,7 @@ func _ready():
 	GameDialogManager.dialog_started.connect(_on_dialog_started)
 	GameDialogManager.dialog_updated.connect(_on_dialog_updated)
 	GameDialogManager.dialog_ended.connect(_on_dialog_ended)
-	#hide()
+	visible = false
 
 func _on_dialog_started(dialog_data: Dictionary, npc: Node):
 	current_dialog_data = dialog_data

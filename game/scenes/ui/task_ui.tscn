@@ -1,0 +1,236 @@
+[gd_scene format=3 uid="uid://c56dbecuerpeg"]
+
+[ext_resource type="Script" uid="uid://i0cpgi6h3syj" path="res://scripts/ui/task_ui.gd" id="1_kplmg"]
+[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="2_f01ls"]
+[ext_resource type="FontFile" uid="uid://dx0jy8f3giaa1" path="res://assets/fonts/SourceHanSansSC-Bold.otf" id="3_xshfp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.15, 0.15, 0.18, 0.92)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_detail"]
+bg_color = Color(0.2, 0.2, 0.25, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list"]
+bg_color = Color(0.18, 0.18, 0.22, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="TaskUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_kplmg")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(800, 520)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Title" type="Label" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 12.0
+offset_right = 200.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("3_xshfp")
+theme_override_font_sizes/font_size = 24
+text = "任务"
+
+[node name="CloseButton" type="Button" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 12.0
+offset_right = 780.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "关闭"
+
+[node name="FilterContainer" type="HBoxContainer" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 16.0
+offset_right = 550.0
+offset_bottom = 44.0
+
+[node name="FilterLabel" type="Label" parent="CenterContainer/Background/FilterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "筛选:"
+
+[node name="FilterAll" type="Button" parent="CenterContainer/Background/FilterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "全部"
+
+[node name="FilterInProgress" type="Button" parent="CenterContainer/Background/FilterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "进行中"
+
+[node name="FilterCompleted" type="Button" parent="CenterContainer/Background/FilterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "已完成"
+
+[node name="SortContainer" type="HBoxContainer" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 16.0
+offset_right = 720.0
+offset_bottom = 44.0
+
+[node name="SortLabel" type="Label" parent="CenterContainer/Background/SortContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "排序:"
+
+[node name="SortByTime" type="Button" parent="CenterContainer/Background/SortContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "触发时间"
+
+[node name="SortByProgress" type="Button" parent="CenterContainer/Background/SortContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "完成进度"
+
+[node name="ListPanel" type="Panel" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 56.0
+offset_right = 420.0
+offset_bottom = 480.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_list")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/Background/ListPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TaskListContainer" type="VBoxContainer" parent="CenterContainer/Background/ListPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EmptyHint" type="Label" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 240.0
+offset_right = 380.0
+offset_bottom = 270.0
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 16
+text = "没有符合条件的任务"
+
+[node name="DetailPanel" type="Panel" parent="CenterContainer/Background"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 56.0
+offset_right = 780.0
+offset_bottom = 420.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_detail")
+
+[node name="TaskName" type="Label" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 320.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("3_xshfp")
+theme_override_font_sizes/font_size = 22
+text = ""
+
+[node name="TaskStatus" type="Label" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 54.0
+offset_right = 320.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 16
+text = ""
+
+[node name="TaskProgress" type="Label" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 84.0
+offset_right = 320.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 16
+text = ""
+
+[node name="TaskDescription" type="Label" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 116.0
+offset_right = 320.0
+offset_bottom = 240.0
+autowrap_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = ""
+
+[node name="FocusHint" type="Label" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 248.0
+offset_right = 320.0
+offset_bottom = 290.0
+autowrap_mode = 2
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 13
+text = "未设置焦点任务"
+
+[node name="SetFocusButton" type="Button" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 300.0
+offset_right = 280.0
+offset_bottom = 340.0
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 16
+text = "设为焦点任务"
+
+[node name="AutoFocusCheck" type="CheckBox" parent="CenterContainer/Background/DetailPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 350.0
+offset_right = 320.0
+offset_bottom = 375.0
+theme_override_fonts/font = ExtResource("2_f01ls")
+theme_override_font_sizes/font_size = 14
+text = "自动选择继任焦点任务"

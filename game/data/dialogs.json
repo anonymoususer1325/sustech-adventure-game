@@ -2,11 +2,15 @@
   "dialogs": {
 	"npc_greeting": {
 	  "id": "npc_greeting",
-	  "text": "你好啊，新同学！需要帮忙吗？",
+	  "text": "你好啊，新同学！刚来南科大吧？需要帮忙吗？",
 	  "options": [
 		{
 		  "text": "请问图书馆怎么走？",
 		  "next_id": "npc_library_dir"
+		},
+		{
+		  "text": "校园里有什么好玩的地方？",
+		  "next_id": "npc_campus_info"
 		},
 		{
 		  "text": "没事，谢谢。",
@@ -16,23 +20,93 @@
 	},
 	"npc_library_dir": {
 	  "id": "npc_library_dir",
-	  "text": "沿着这条路一直走，右转就能看到图书馆了。",
+	  "text": "沿着这条路一直往北走，在湖畔就能看到图书馆了，很好认的！",
 	  "options": [
 		{
-		  "text": "谢谢！",
+		  "text": "谢谢！我这就去。",
+		  "next_id": "npc_thanks"
+		}
+	  ]
+	},
+	"npc_campus_info": {
+	  "id": "npc_campus_info",
+	  "text": "南科大有很多有趣的地方！教学楼、图书馆、宿舍区都值得逛逛。",
+	  "options": [
+		{
+		  "text": "好的，我去探索一下。",
 		  "next_id": "npc_thanks"
 		}
 	  ]
 	},
 	"npc_thanks": {
 	  "id": "npc_thanks",
-	  "text": "不客气，祝你学习愉快！",
+	  "text": "不客气，祝你校园生活愉快！",
 	  "options": []
 	},
 	"npc_goodbye": {
 	  "id": "npc_goodbye",
-	  "text": "再见！",
+	  "text": "再见！祝你探索愉快！",
 	  "options": []
+	},
+	"npc_library_found": {
+	  "id": "npc_library_found",
+	  "text": "欢迎来到南科大图书馆！这里可以看书、自习，还能借阅各种书籍。",
+	  "options": [
+		{
+		  "text": "这里真不错！",
+		  "next_id": "npc_library_tip"
+		}
+	  ]
+	},
+	"npc_library_tip": {
+	  "id": "npc_library_tip",
+	  "text": "新同学记得去宿舍找找你的学生证，没有学生证可借不了书哦。",
+	  "options": [
+		{
+		  "text": "好的，我这就去找。",
+		  "next_id": ""
+		}
+	  ]
+	},
+	"npc_dorm_welcome": {
+	  "id": "npc_dorm_welcome",
+	  "text": "欢迎来到宿舍区！你的房间在二楼，快去找找有什么重要的东西落在房间里了。",
+	  "options": [
+		{
+		  "text": "好的，我找找学生证。",
+		  "next_id": "npc_dorm_tip"
+		}
+	  ]
+	},
+	"npc_dorm_tip": {
+	  "id": "npc_dorm_tip",
+	  "text": "找到学生证后记得去教学楼看看。祝你一切顺利！",
+	  "options": [
+		{
+		  "text": "谢谢阿姨！",
+		  "next_id": ""
+		}
+	  ]
+	},
+	"npc_teaching_intro": {
+	  "id": "npc_teaching_intro",
+	  "text": "同学，这支铅笔给你，上课记笔记用得上！",
+	  "options": [
+		{
+		  "text": "谢谢！",
+		  "next_id": ""
+		}
+	  ]
+	},
+	"not_ready_yet": {
+	  "id": "not_ready_yet",
+	  "text": "物资不全，不能进入教室！还需要：学生证（宿舍）、借阅卡（图书馆）、便条（中心广场）、铅笔（教学楼）。",
+	  "options": [
+		{
+		  "text": "好的，我这就去收集。",
+		  "next_id": ""
+		}
+	  ]
 	}
   }
 }

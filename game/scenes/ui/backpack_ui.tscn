@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cwxysvhkax60o"]
 
-[ext_resource type="Script" uid="uid://bqs3ns2q52rby" path="res://scripts/ui/backpack_ui.gd" id="1_2d63f"]
+[ext_resource type="Script" uid="uid://r831og8jwu8p" path="res://scripts/ui/backpack_ui.gd" id="1_2d63f"]
 [ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="2_0sr3u"]
 [ext_resource type="FontFile" uid="uid://dx0jy8f3giaa1" path="res://assets/fonts/SourceHanSansSC-Bold.otf" id="3_jy0cy"]
 

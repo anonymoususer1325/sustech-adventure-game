@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # 移动速度
 @export var walk_speed: float = 200.0
-@export var run_speed: float = 320.0   # 1.6倍行走速度
+@export var run_speed: float = 600.0   # 2倍行走速度
 
 # 当前实际速度
 var current_speed: float = walk_speed
@@ -105,6 +105,16 @@ func _input(event):
 		var backpack = _get_backpack_ui()
 		if backpack:
 			backpack.toggle()
+	
+	if event.is_action_pressed("toggle_task_ui"):
+		if GameState.is_dialog_active:
+			return
+		var pause = _get_pause_menu()
+		if pause and pause.visible:
+			return
+		var task_ui = _get_task_ui()
+		if task_ui:
+			task_ui.toggle()
 
 # 辅助：从当前场景获取 BackpackUI 节点
 func _get_backpack_ui():
@@ -120,4 +130,13 @@ func _get_pause_menu():
 	var scene = get_tree().current_scene
 	if scene:
 		return scene.get_node_or_null("PauseMenu")
+	return null
+
+# 辅助：从当前场景获取 TaskUI 节点
+func _get_task_ui():
+	var scene = get_tree().current_scene
+	if scene:
+		var layer = scene.get_node_or_null("TaskLayer")
+		if layer:
+			return layer.get_node_or_null("TaskUI")
 	return null

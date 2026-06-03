@@ -53,9 +53,10 @@ func _ready():
 	settings_panel.visible = false
 
 func _on_new_game_pressed():
-	# 开始新游戏：清除存档，进入初始场景
-	# 可以先删除存档文件，或重置全局状态
-	# 然后切换到游戏场景（例如 campus.tscn）
+	# 重置全局状态
+	TaskManager.reset()
+	InventoryManager.set_items([])
+	GameClock.reset()
 	get_tree().change_scene_to_file("res://scenes/levels/campus_LH3_sou.tscn")
 
 func _input(event):

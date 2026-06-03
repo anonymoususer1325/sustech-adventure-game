@@ -197,6 +197,10 @@ func _apply_use_effect(item_id: String, effect: String, params: Dictionary):
 			print("使用物品 [", item_id, "] 解锁门，参数: ", params)
 		"read_message":
 			print("使用物品 [", item_id, "] 阅读信息，参数: ", params)
+		"add_time":
+			var seconds = params.get("seconds", 60)
+			GameClock.add_time(seconds)
+			print("使用物品 [", item_id, "] 增加时间 +", seconds, "秒")
 		"open_mail":
 			print("使用物品 [", item_id, "] 打开邮件，参数: ", params)
 		"reveal_map":

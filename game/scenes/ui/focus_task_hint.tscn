@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dujxxhdhgsv51"]
+
+[ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="2_v1q5i"]
+[ext_resource type="FontFile" uid="uid://dx0jy8f3giaa1" path="res://assets/fonts/SourceHanSansSC-Bold.otf" id="3_42pxk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.1, 0.1, 0.15, 0.85)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="FocusTaskHint" type="Control" unique_id=1778698143]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 168.0
+offset_bottom = 88.0
+mouse_filter = 2
+
+[node name="Background" type="Panel" parent="." unique_id=1691332543]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="VBox" type="VBoxContainer" parent="Background" unique_id=1079998118]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TaskName" type="Label" parent="Background/VBox" unique_id=805887381]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_42pxk")
+theme_override_font_sizes/font_size = 14
+
+[node name="Progress" type="Label" parent="Background/VBox" unique_id=1174334707]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_v1q5i")
+theme_override_font_sizes/font_size = 12
+
+[node name="Countdown" type="Label" parent="Background/VBox" unique_id=1092837465]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_v1q5i")
+theme_override_font_sizes/font_size = 12
+text = "剩余: 10:00"
+theme_override_font_sizes/font_size = 13
+
+[node name="CompletePopup" type="Label" parent="." unique_id=487005132]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 96.0
+offset_right = 300.0
+offset_bottom = 124.0
+theme_override_fonts/font = ExtResource("3_42pxk")
+theme_override_font_sizes/font_size = 16

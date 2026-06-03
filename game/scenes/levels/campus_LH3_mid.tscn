@@ -18,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://idgvfb307cmy" path="res://scenes/objects/npc.tscn" id="15_hraxc"]
 [ext_resource type="PackedScene" uid="uid://cwxysvhkax60o" path="res://scenes/ui/backpack_ui.tscn" id="16_backpack"]
 [ext_resource type="PackedScene" uid="uid://btxgckw4twl08" path="res://scenes/objects/item_pickup.tscn" id="17_pickup"]
+[ext_resource type="PackedScene" uid="uid://c56dbecuerpeg" path="res://scenes/ui/task_ui.tscn" id="18_taskui"]
+[ext_resource type="PackedScene" path="res://scenes/ui/countdown_hud.tscn" id="30_hud"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nva0k"]
 light_mode = 2
@@ -99,11 +101,19 @@ tile_set = ExtResource("11_u1vhr")
 
 [node name="PauseMenu" parent="." unique_id=1608922808 instance=ExtResource("6_n1p8n")]
 
-[node name="BackpackLayer" type="CanvasLayer" parent="."]
+[node name="BackpackLayer" type="CanvasLayer" parent="." unique_id=51774412]
 process_mode = 3
 
 [node name="BackpackUI" parent="BackpackLayer" unique_id=1938467130 instance=ExtResource("16_backpack")]
 visible = false
+
+[node name="TaskLayer" type="CanvasLayer" parent="." unique_id=1291777125]
+process_mode = 3
+
+[node name="TaskUI" parent="TaskLayer" unique_id=1535724614 instance=ExtResource("18_taskui")]
+visible = false
+
+[node name="CountdownHud" parent="TaskLayer" instance=ExtResource("30_hud")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=537991081]
 
@@ -116,6 +126,7 @@ offset_right = 1.0
 offset_bottom = -2.0
 
 [node name="LeftTeleportArea" parent="." unique_id=1122726686 groups=["teleport_area"] instance=ExtResource("14_nva0k")]
+visible = false
 position = Vector2(0, -80)
 scale = Vector2(1, 13)
 target_scene = "res://scenes/levels/campus_LH3_sou.tscn"
@@ -129,17 +140,20 @@ y_sort_enabled = true
 
 [node name="Npc001" parent="YSort" unique_id=879473222 instance=ExtResource("15_hraxc")]
 position = Vector2(512, -160)
+dialog_id = "npc_greeting"
+display_name = "热心同学"
 
 [node name="Player" parent="YSort" unique_id=642336814 instance=ExtResource("5_hbykn")]
 y_sort_enabled = true
 position = Vector2(144, -16)
 
-[node name="TestItemLychee" parent="YSort" instance=ExtResource("17_pickup")]
+[node name="TestItemLychee" parent="YSort" unique_id=273511386 instance=ExtResource("17_pickup")]
 position = Vector2(224, -16)
-item_id = "lychee"
 item_count = 3
 
-[node name="TestItemSpeedBoost" parent="YSort" instance=ExtResource("17_pickup")]
+[node name="TestItemNote" parent="YSort" unique_id=1530516981 instance=ExtResource("17_pickup")]
 position = Vector2(304, -16)
-item_id = "speed_boost"
-item_count = 1
+item_id = "note"
+
+[node name="TeachingExitMarker" type="Marker2D" parent="." unique_id=1590338002]
+position = Vector2(144, 64)

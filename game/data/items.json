@@ -36,13 +36,13 @@
     "lychee": {
       "id": "lychee",
       "name": "荔枝",
-      "description": "南科大校园特产，清甜可口。可以用来恢复体力。",
+      "description": "南科大校园特产，清甜可口。使用后倒计时+60秒。",
       "icon_path": "",
       "stackable": true,
       "max_stack": 99,
-      "use_effect": "heal",
+      "use_effect": "add_time",
       "use_effect_params": {
-        "heal_amount": 20
+        "seconds": 60
       }
     },
     "library_card": {
@@ -73,6 +73,16 @@
       "stackable": true,
       "max_stack": 99,
       "use_effect": "read_message",
+      "use_effect_params": {}
+    },
+    "pencil": {
+      "id": "pencil",
+      "name": "铅笔",
+      "description": "一支普通的铅笔，教学楼管理员给你的。",
+      "icon_path": "",
+      "stackable": false,
+      "max_stack": 1,
+      "use_effect": "",
       "use_effect_params": {}
     },
     "speed_boost": {

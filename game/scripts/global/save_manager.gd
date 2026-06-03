@@ -60,6 +60,13 @@ func collect_save_data() -> Dictionary:
 	data["facing_x"] = facing.x
 	data["facing_y"] = facing.y
 	
+	# 任务系统数据
+	data["task_filter_mode"] = TaskManager.filter_mode if TaskManager else 0
+	data["task_sort_mode"] = TaskManager.sort_mode if TaskManager else 0
+	data["task_auto_focus"] = TaskManager.auto_select_focus if TaskManager else true
+	data["task_states"] = get_all_task_states()
+	data["focus_task_id"] = TaskManager.get_focus_task_id() if TaskManager else ""
+	
 	# 元数据（需要从游戏管理器获取）
 	data["main_quest_progress"] = get_main_quest_progress()
 	data["side_quests_completed"] = get_side_quests_completed()
@@ -146,20 +153,34 @@ func get_inventory_items() -> Array:
 
 # ========== 占位函数（待任务系统完善后替换） ==========
 func get_main_quest_progress() -> String:
-	# 模拟主线进度
-	return "寻找学生证"
+	var focus_id = TaskManager.get_focus_task_id() if TaskManager else ""
+	if not focus_id.is_empty():
+		var def = TaskManager.get_focus_task_data()
+		if def:
+			return def.name
+	return "无进行中任务"
 
 func get_side_quests_completed() -> int:
-	# 模拟支线完成数量
+	if TaskManager:
+		return TaskManager.get_completed_tasks().size()
 	return 0
 
 func get_current_focus_task() -> String:
-	# 模拟当前焦点任务
-	return "前往图书馆"
+	var focus_id = TaskManager.get_focus_task_id() if TaskManager else ""
+	if not focus_id.is_empty():
+		var def = TaskManager.get_focus_task_data()
+		return def.name if def else focus_id
+	return "未设置"
 
 # 保存时
 func get_play_time() -> float:
 	return GameClock.get_total_seconds() if GameClock else 0.0
+
+# 获取所有任务状态（用于存档）
+func get_all_task_states() -> Dictionary:
+	if not TaskManager:
+		return {}
+	return TaskManager.get_all_task_states()
 
 # save_manager.gd（续）
 
@@ -214,6 +235,24 @@ func load_game(slot: int) -> bool:
 		"facing": target_facing,
 		"play_time": play_time
 	}
+	
+	# 恢复任务系统设置
+	if TaskManager:
+		# 优先恢复完整任务状态（包含进度）
+		var task_states = data.get("task_states", {})
+		if not task_states.is_empty():
+			TaskManager.restore_task_states(task_states)
+			# 恢复焦点任务
+			var focus_id = data.get("focus_task_id", "")
+			if not focus_id.is_empty():
+				TaskManager._set_focus_task(focus_id)
+		else:
+			# 向后兼容：只恢复已完成任务
+			TaskManager.set_completed_tasks(data.get("completed_tasks", []))
+		TaskManager.set_filter_mode(data.get("task_filter_mode", 0))
+		TaskManager.set_sort_mode(data.get("task_sort_mode", 0))
+		TaskManager.auto_select_focus = data.get("task_auto_focus", true)
+	
 	print("load_game: 设置 pending_load_data = ", pending_load_data)
 	
 	# 切换到存档中的场景

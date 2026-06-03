@@ -7,5 +7,18 @@
 monitoring = false
 script = ExtResource("1_4fn8r")
 
+[node name="TeleportSprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(4, 4)
+self_modulate = Color(0.2, 0.6, 1.0, 0.6)
+
+[node name="TeleportLabel" type="Label" parent="."]
+visible = false
+offset_top = -24.0
+offset_bottom = 0.0
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+text = "传送"
+
 [node name="TeleportAreaCollisionShape" type="CollisionShape2D" parent="." unique_id=797724407]
 shape = ExtResource("2_ivd15")

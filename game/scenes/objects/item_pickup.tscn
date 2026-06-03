@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://btxgckw4twl08"]
 
-[ext_resource type="Script" uid="uid://cwhx4hv6wp6r7" path="res://scripts/objects/item_pickup.gd" id="1_3ay6k"]
+[ext_resource type="Script" uid="uid://gib5kuc1ja6e" path="res://scripts/objects/item_pickup.gd" id="1_3ay6k"]
 [ext_resource type="FontFile" uid="uid://b6ld40bxw4sr" path="res://assets/fonts/SourceHanSansSC-Regular.otf" id="2_7c8wa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uayfn"]

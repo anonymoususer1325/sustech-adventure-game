@@ -3,6 +3,10 @@ extends Node2D
 # 场景的北方向量（默认向上为北）
 @export var north_vector: Vector2 = Vector2(0, -1)
 
+const COUNTDOWN_SECONDS: float = 600.0  # 10分钟倒计时
+
+var _game_over: bool = false
+
 @onready var pause_menu = $PauseMenu
 @onready var player = $YSort/Player
 
@@ -27,6 +31,12 @@ func _ready():
 	
 	# 延迟启用传送区域（给玩家稳定时间）
 	_enable_teleport_areas(teleport_areas)
+	
+	# 处理自动开始任务
+	_handle_auto_start_tasks()
+	
+	# 设置任务相关信号连接
+	_setup_task_signals()
 
 # ========== 辅助方法 ==========
 func _disable_teleport_areas() -> Array:
@@ -42,10 +52,14 @@ func _enable_teleport_areas(areas: Array):
 		area.monitoring = true
 		print("恢复传送区域: ", area.name)
 
+var _loaded_from_save: bool = false
+
 func _handle_load_game():
 	var load_data = SaveManager.consume_pending_load_data()
 	if load_data == null:
 		return
+	
+	_loaded_from_save = true
 	
 	if player:
 		player.global_position = load_data["position"]
@@ -55,7 +69,7 @@ func _handle_load_game():
 		
 		# 恢复游玩时长
 		var play_time = load_data.get("play_time", 0.0)
-		GameClock.set_total_seconds(play_time)
+		GameClock.restore_time(play_time)
 		print("从存档恢复游玩时长: ", play_time)
 		
 		LightEffectManager.expand_light(player)
@@ -89,6 +103,24 @@ func _handle_teleport():
 	
 	GameState.lock_movement_for(0.5)
 
+var _tasks_initialized: bool = false
+
+func _handle_auto_start_tasks():
+	if _tasks_initialized:
+		return
+	_tasks_initialized = true
+	
+	# 只有新游戏才自动启动起始任务，读档时不做
+	if not _loaded_from_save:
+		if TaskManager.get_task_status("gather_supplies") == TaskManager.TaskStatus.NOT_STARTED:
+			TaskManager.start_task("gather_supplies")
+	
+	# 确保至少有一个焦点任务
+	if TaskManager.get_focus_task_id().is_empty():
+		var in_progress = TaskManager.get_in_progress_tasks()
+		if not in_progress.is_empty():
+			TaskManager.toggle_focus_task(in_progress[0])
+
 func _setup_interaction_manager():
 	if player:
 		InteractionManager.player = player
@@ -121,6 +153,11 @@ func restore_from_save(data: Dictionary):
 # ========== 输入处理 ==========
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
+		# 如果任务UI打开，优先关闭
+		var task_ui = _get_task_ui_node()
+		if task_ui and task_ui.visible:
+			task_ui.close()
+			return
 		# 如果背包打开，优先关闭背包
 		var backpack = _get_backpack()
 		if backpack and backpack.visible:
@@ -157,3 +194,73 @@ func _get_backpack():
 	if layer:
 		return layer.get_node_or_null("BackpackUI")
 	return null
+
+# 获取任务UI节点
+func _get_task_ui_node():
+	var layer = get_node_or_null("TaskLayer")
+	if layer:
+		return layer.get_node_or_null("TaskUI")
+	return null
+
+# ========== 任务链信号设置 ==========
+func _setup_task_signals():
+	if TaskManager.task_completed.is_connected(_on_task_completed_chain):
+		TaskManager.task_completed.disconnect(_on_task_completed_chain)
+	TaskManager.task_completed.connect(_on_task_completed_chain)
+	
+	if InventoryManager.inventory_updated.is_connected(_on_inventory_updated_check):
+		InventoryManager.inventory_updated.disconnect(_on_inventory_updated_check)
+	InventoryManager.inventory_updated.connect(_on_inventory_updated_check)
+
+# ========== 倒计时 ==========
+func _process(_delta):
+	if _game_over:
+		return
+	if get_tree().paused:
+		return
+	
+	var remaining = COUNTDOWN_SECONDS - GameClock.get_total_seconds()
+	if remaining <= 0:
+		_game_over = true
+		_show_game_over()
+
+func get_remaining_time() -> float:
+	return max(0, COUNTDOWN_SECONDS - GameClock.get_total_seconds())
+
+# ========== 任务链信号方法 ==========
+
+# 任务完成链
+func _on_task_completed_chain(task_id: String):
+	match task_id:
+		"gather_supplies":
+			if TaskManager.get_task_status("deliver_to_teaching") == TaskManager.TaskStatus.NOT_STARTED:
+				TaskManager.start_task("deliver_to_teaching")
+				print("新任务: 将物资送到教学楼")
+		"deliver_to_teaching":
+			print("全部任务完成！通关！")
+			_show_game_complete()
+
+# 实时监测物品收集进度
+func _on_inventory_updated_check():
+	if TaskManager.get_task_status("gather_supplies") == TaskManager.TaskStatus.IN_PROGRESS:
+		var progress = 0
+		if InventoryManager.has_item("student_card"):
+			progress += 1
+		if InventoryManager.has_item("library_card"):
+			progress += 1
+		if InventoryManager.has_item("note"):
+			progress += 1
+		if InventoryManager.has_item("pencil"):
+			progress += 1
+		TaskManager.update_progress("gather_supplies", progress)
+
+# 显示通关画面
+func _show_game_complete():
+	call_deferred("_deferred_switch_scene", "res://scenes/ui/game_complete.tscn")
+
+func _show_game_over():
+	call_deferred("_deferred_switch_scene", "res://scenes/ui/game_over.tscn")
+
+func _deferred_switch_scene(scene_path: String):
+	get_tree().paused = false
+	get_tree().change_scene_to_file(scene_path)
