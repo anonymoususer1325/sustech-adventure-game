@@ -100,6 +100,12 @@ game/
 
 ---
 
+## 游戏截图
+
+![image-20260605213638529](C:\Users\周可\AppData\Roaming\Typora\typora-user-images\image-20260605213638529.png)
+
+![image-20260605213707622](C:\Users\周可\AppData\Roaming\Typora\typora-user-images\image-20260605213707622.png)![image-20260605213818375](C:\Users\周可\AppData\Roaming\Typora\typora-user-images\image-20260605213818375.png)
+
 ## ⚠️ 已知问题
 
 - 地图装饰层（Deco/Props/Buildings）尚未完整铺设，仅 Ground 层可用
