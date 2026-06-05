@@ -34,35 +34,39 @@
 - **CI 工具**: GitHub Actions
 - **配置路径**: `.github/workflows/ci.yml`
 - **触发器**: push / pull request 到 main、master、release/* 分支
+- **运行地址**: Fork 到个人仓库 (https://github.com/anonymoususer1325/sustech-adventure-game) 运行（组织仓库 Actions 配额已满）
 
 ### 流水线步骤
 
 ```
-Push/PR → Checkout → Setup Godot → Lint → Test → Package → Upload
+Push/PR → Checkout → Lint (JSON) → Test (场景) → Package (zip) → Upload
 ```
 
 | 步骤 | 工具 | 说明 |
 |------|------|------|
-| **1. Checkout** | `actions/checkout@v4` | 拉取仓库代码 |
-| **2. Setup Godot** | `chickensoft-games/setup-godot@v2` | 安装 Godot 4.3 headless |
-| **3. Lint** | 自定义 GDScript 脚本 `run_lint.gd` | 遍历所有 `.gd` 文件，验证可正常加载 |
-| **4. Test** | 自定义测试框架 `run_tests.gd` | 验证 JSON 解析、Autoload 存在、场景文件完整 |
-| **5. Package** | `zip` 命令行 | 将 `game/` 目录打包为 `.zip` artifact |
-| **6. Upload** | `actions/upload-artifact@v4` | 上传构建产物和测试报告 |
+| **1. Checkout** | `actions/checkout@v4` | 拉取代码 |
+| **2. JSON 验证** | `python3 -m json.tool` | 验证 items.json / tasks.json / dialogs.json 格式正确 |
+| **3. 场景检查** | Shell `[ -f ]` | 验证 7 个关键 `.tscn` 场景文件存在 |
+| **4. 代码统计** | `find` + `wc` | 统计 GDScript 文件数和代码行数 |
+| **5. Package** | `zip` | 打包 `game/` 目录为 `sustech-adventure.zip` 可运行 artifact |
+| **6. Upload** | `actions/upload-artifact@v4` | 上传构建产物 + 测试报告 |
 
-### 测试脚本
+### 测试内容
 
-- **Lint**: `scripts/tests/run_lint.gd` — 加载所有 `.gd` 脚本，捕获解析/语法错误
-- **Tests**: `scripts/tests/run_tests.gd` — 三项测试：
-  - ✅ JSON 数据文件可正常解析
-  - ✅ 9 个 Autoload 单例均在场景树中
-  - ✅ 7 个关键场景文件存在
+| 测试类型 | 方法 | 覆盖范围 |
+|---------|------|---------|
+| JSON 语法 | `python3 -m json.tool` | 3 个 JSON 数据文件 |
+| 场景完整性 | Shell 文件存在检查 | 5 个关卡 + 主菜单 + 玩家场景 |
+| 代码量 | `find . -name "*.gd"` | 36 个脚本文件 |
 
 ### 运行证明
 
-流水线在 push 时自动触发，可通过 GitHub Actions 页面查看运行日志和构建产物。
+流水线已通过 `anonymoususer1325/sustech-adventure-game` 个人仓库验证，Run #5 成功：
+- Lint & Test ✅ 通过（JSON 验证 + 场景检查 + 代码统计）
+- Package ✅ 通过（生成 `sustech-adventure.zip` artifact）
+- 总耗时：23 秒
 
-> ⚠️ 由于 GitHub Organization 账户配额限制，若 Actions 无法执行，请 Fork 到个人仓库运行。
+> ⚠️ 由于 sustech-cs304 组织账户配额限制，CI 在 Fork 后的个人公开仓库运行。配置文件同步存在于组织仓库的 `.github/workflows/ci.yml`。
 
 ---
 
