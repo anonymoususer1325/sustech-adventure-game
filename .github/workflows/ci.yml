@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main, master]
 
+env:
+  GODOT_VERSION: "4.2.2"
+
 jobs:
   lint-and-test:
     name: Lint & Test
@@ -15,15 +18,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Godot
-        uses: chickensoft-games/setup-godot@v2
-        with:
-          version: 4.3
+        run: |
+          wget -q https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          unzip -q Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          sudo mv Godot_v${GODOT_VERSION}-stable_linux.x86_64/godot.linuxbsd.editor.x86_64 /usr/local/bin/godot
+          godot --version
 
-      - name: Lint GDScript (加载验证所有脚本)
+      - name: Lint GDScript
         run: |
           godot --headless --path game --script res://scripts/tests/run_lint.gd
 
-      - name: Run Tests (JSON解析 + Autoload + 场景验证)
+      - name: Run Tests
         run: |
           godot --headless --path game --script res://scripts/tests/run_tests.gd
 
@@ -33,9 +38,7 @@ jobs:
           echo "## Test Report" > test-report.md
           echo "**Date:** $(date)" >> test-report.md
           echo "**Commit:** ${{ github.sha }}" >> test-report.md
-          echo "**Lint:** ✅ Passed" >> test-report.md
-          echo "**Tests:** ✅ Passed" >> test-report.md
-          cat test-report.md
+          echo "**Status:** ✅ Passed" >> test-report.md
 
       - name: 上传测试报告
         uses: actions/upload-artifact@v4
@@ -54,7 +57,6 @@ jobs:
       - name: Archive Game
         run: |
           mkdir -p artifacts
-          # 打包 game 目录为 artifact（排除 git 和 import 临时文件）
           cd game && zip -r ../artifacts/sustech-adventure.zip . -x "*.gitkeep" ".godot/*" && cd ..
           ls -lh artifacts/
 
@@ -65,14 +67,6 @@ jobs:
           echo "**Branch:** ${{ github.ref_name }}" >> build-report.md
           echo "**Commit:** ${{ github.sha }}" >> build-report.md
           echo "**Status:** ✅ 构建成功" >> build-report.md
-          echo "" >> build-report.md
-          echo "### 构建产物" >> build-report.md
-          echo "- \`sustech-adventure.zip\` — 完整 Godot 项目（含场景、脚本、资源）" >> build-report.md
-          echo "" >> build-report.md
-          echo "### 运行方式" >> build-report.md
-          echo "1. 解压 \`sustech-adventure.zip\`" >> build-report.md
-          echo "2. 用 Godot 4.6 打开 \`project.godot\`" >> build-report.md
-          echo "3. 按下 F5 运行" >> build-report.md
 
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
